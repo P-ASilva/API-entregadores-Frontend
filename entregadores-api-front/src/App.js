@@ -1,11 +1,15 @@
 
 import './App.css';
 import Cadastro from './pages/Cadastro';
+import { Link, Route, Routes } from 'react-router-dom';
 
 function App() {
-  return (
+
+  return (  
     <div className="App">
-      <Cadastro />
+      <Routes>
+        <Route path='/cadastro' element={<Cadastro/>}></Route>
+      </Routes>
     </div>
   );
 }
