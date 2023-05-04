@@ -13,17 +13,24 @@
   }
 }
 
-.App-header {
+.Header {
+  padding: 0.5%;
+  padding-left: 5%;
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-direction: row;
+  align-items: left;
+  justify-content: flex-start;
   color: white;
+  width: 100%;
+  height:20%
 }
-
+.SwitchMui {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  padding-left: 60%;
+}
 .App-link {
   color: #61dafb;
 }
