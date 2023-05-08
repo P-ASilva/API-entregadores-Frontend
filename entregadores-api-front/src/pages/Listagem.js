@@ -1,40 +1,49 @@
 import Header from "../components/Header";
 import { hasFormSubmit } from "@testing-library/user-event/dist/utils"
 import React, {useState,useEffect} from "react"
+import axios from 'axios'
+function Listagem() {
 
-function entregadores() {
+    const [entregadores,setEntregadores] = useState([])
 
-    const [name,setName] = useState()
-    const [cpf,setCpf] = useState()
-    const [veiculo,setVeiculo] = useState()
-
-    const data = {
-        'name':name,
-        'cpf':cpf,
-        'veiculo':veiculo
-    }
-
-    const handleClick = click  => {
-        alert(name + ' ' + cpf + ' ' + veiculo + ' ' )
-        fetch('http://localhost:4000/entregadores', { 
-            method:'POST',
-            headers:{"Content-Type":'application/json'},
-            body: JSON.stringify(data)}
-        ).then(response => {
-            if (response.status===200) {
-                alert('Editar realizado com sucesso')
+    useEffect(()=> {
+        const fetchData = async ()  => {
+            await fetch('http://localhost:8080/entregadores', { 
+                method:'GET',
+                headers:{"Content-Type":'application/json'},
             }
-        }).catch(ex => {
-            alert('Erro ao se cadastrar como entregador')
-        })
-    }
+            ).then(response => {
+                if (response.status === 200 || response.status === 201) {
+                    return response.json()
+                }else {return response.json()}
+            }).then(entregadores => {setEntregadores(entregadores) 
+                alert(entregadores)}
+
+            ).catch(ex => {
+                alert(ex)
+            })
+          }
+        fetchData()
+    },[])
+
+
 
     return (
-    <div>
-      <Header />
-    </div>
+        <div>
+            <Header></Header>
+            <div>
+                {entregadores.map(entregador => {
+                    return(
+                        <div key={entregador.id}>
+                            <h2>{entregador.title}</h2>
+                            <p>{entregador.dates}</p>
+                        </div>
+                    )
+                })}
+            </div>
+        </div>
     );
   }
   
-  export default Editar;
+export default Listagem;
   

@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
+import { cpf } from 'cpf-cnpj-validator';
 
 function Copyright(props) {
   return (
@@ -36,7 +37,6 @@ export default function SignUp() {
   const handleClick = (event)  => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    alert(data.get("firstName") + ' ' + data.get("cpf") + ' ' + data.get("veiculo") + ' ' )
     fetch('http://localhost:4000/cadastro', { 
         method:'POST',
         headers:{"Content-Type":'application/json'},
@@ -44,10 +44,13 @@ export default function SignUp() {
     ).then(response => {
         alert(response.status)
         if (response.status===200 || response.status===201) {
-            alert('Cadastro realizado com sucesso')
-            localStorage.setItem('name',data.get('firstName'))
-            navigate('/test')
-
+            data.get('email')
+            const c = (data.get('cpf'))
+            if (cpf.isValid(c)) {
+              alert('Cadastro realizado com sucesso')
+              localStorage.setItem('name',data.get('firstName'))
+              navigate('/test')
+            } else {alert('Cpf invalido')}
         }
     }).catch(ex => {
         alert('Erro ao se cadastrar como entregador')
