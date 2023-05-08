@@ -33,19 +33,6 @@ export default function SignUp() {
 
   const navigate = useNavigate()
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     email: data.get('email'),
-  //     password: data.get('password'),
-  //     cpf: data.get('cpf'),
-  //     veiculo: data.get('veiculo'),
-  //     firstName: data.get('firstName'),
-  //     lastName : data.get('lastName')
-  //   });
-  // };
-
   const handleClick = (event)  => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -58,7 +45,9 @@ export default function SignUp() {
         alert(response.status)
         if (response.status===200 || response.status===201) {
             alert('Cadastro realizado com sucesso')
+            localStorage.setItem('name',data.get('firstName'))
             navigate('/test')
+
         }
     }).catch(ex => {
         alert('Erro ao se cadastrar como entregador')
