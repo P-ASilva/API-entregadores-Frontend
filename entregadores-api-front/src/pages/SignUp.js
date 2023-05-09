@@ -20,7 +20,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Your Ass
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -36,19 +36,22 @@ export default function SignUp() {
 
   const handleClick = (event)  => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    fetch('http://localhost:4000/cadastro', { 
+    const formdata = new FormData(event.currentTarget)
+    const data = {
+      'nome': formdata.get('nome'),
+      'cpf': formdata.get('cpf'),
+      'tipo_veiculo': formdata.get('tipo_veiculo')
+    };
+    fetch('http://localhost:8080/entregador', { 
         method:'POST',
         headers:{"Content-Type":'application/json'},
         body: JSON.stringify(data)}
     ).then(response => {
-        alert(response.status)
         if (response.status===200 || response.status===201) {
-            data.get('email')
-            const c = (data.get('cpf'))
+            const c = (data.cpf)
             if (cpf.isValid(c)) {
               alert('Cadastro realizado com sucesso')
-              localStorage.setItem('name',data.get('firstName'))
+              localStorage.setItem('nome',data.nome)
               navigate('/test')
             } else {alert('Cpf invalido')}
         }
@@ -80,11 +83,11 @@ export default function SignUp() {
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="nome"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="nome"
+                  label="nome"
                   autoFocus
                 />
               </Grid>
@@ -92,31 +95,10 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
+                  name="tipo_veiculo"
+                  label="tipo_veiculo"
+                  type="tipo_veiculo"
+                  id="tipo_veiculo"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -124,20 +106,10 @@ export default function SignUp() {
                   required
                   fullWidth
                   name="cpf"
-                  label="Cpf"
-                  type="cpf"
+                  label="cpf"
+                  type="Cpf"
                   id="cpf"
                   autoComplete="cpf"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="veiculo"
-                  label="Veiculo"
-                  type="veiculo"
-                  id="veiculo"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -155,13 +127,6 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 5 }} />

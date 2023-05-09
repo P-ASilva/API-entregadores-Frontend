@@ -7,7 +7,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import IconButton from '@mui/material/IconButton';
 
 function Header() {
-  var name = localStorage.getItem('name')
+  var name = localStorage.getItem('nome')
   const navigate = useNavigate()
   const handleClick = click  => {
     fetch('http://localhost:4000/test', { 
