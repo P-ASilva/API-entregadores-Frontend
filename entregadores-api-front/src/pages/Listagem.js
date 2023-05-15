@@ -17,7 +17,7 @@ function Listagem() {
                 if (response.status === 200 || response.status === 201) {
                     return response.json()
                 }else {return response.json()}
-            }).then(entregadores => {setEntregadores(entregadores) 
+            }).then(entregadores => {
                 setEntregadores(entregadores)
                 alert(JSON.stringify(entregadores))
             }
