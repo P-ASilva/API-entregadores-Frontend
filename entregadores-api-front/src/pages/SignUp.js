@@ -40,7 +40,10 @@ export default function SignUp() {
     const data = {
       'nome': formdata.get('nome'),
       'cpf': formdata.get('cpf'),
-      'tipo_veiculo': formdata.get('tipo_veiculo')
+      'tipo_veiculo': formdata.get('tipo_veiculo'),
+      "preco_viagem": 50,
+      "status_ocupacao": "DISPONIVEL",
+      "status_utilizacao": "PENDENTE",
     };
     fetch('http://localhost:8080/entregador', { 
         method:'POST',

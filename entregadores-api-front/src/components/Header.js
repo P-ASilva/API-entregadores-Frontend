@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import SettingsIcon from '@mui/icons-material/Settings';
 import HomeIcon from '@mui/icons-material/Home';
 import IconButton from '@mui/material/IconButton';
+import DeleteButton from "../components/DeleteButton";
+import React, {useState,useEffect} from "react"
 
 function Header() {
   var name = localStorage.getItem('nome')
@@ -47,6 +49,7 @@ function Header() {
         <h1>Welcome, {name}</h1> 
       </div>
       <div className='SwitchMui'>
+        <DeleteButton></DeleteButton>
         <IconButton aria-label="settings" color="primary" onClick={handleClick} padding='0%'>
           <SettingsIcon />
         </IconButton>

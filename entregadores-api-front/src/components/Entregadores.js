@@ -8,29 +8,28 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 
 function Entregadores() {
-
-  const [entregadores,setEntregadores] = useState([])
-
-  useEffect(()=> {
-      const fetchData = async ()  => {
-          await fetch('http://localhost:8080/entregador', { 
-              method:'GET',
-              headers:{"Content-Type":'application/json'},
-          }
-          ).then(response => {
-              if (response.status === 200 || response.status === 201) {
-                  return response.json()
-              }else {return response.json()}
-          }).then(entregadores => {
-              setEntregadores(entregadores)
-              alert(JSON.stringify(entregadores))
-          }
-          ).catch(ex => {
-              alert(ex)
-          })
-        }
-      fetchData()
-  },[])
+    const [entregadores,setEntregadores] = useState([])
+    
+    useEffect(()=> {
+        const fetchData = async ()  => {
+            await fetch('http://localhost:8080/entregador', { 
+                method:'GET',
+                headers:{"Content-Type":'application/json'},
+            }
+            ).then(response => {
+                if (response.status === 200 || response.status === 201) {
+                    return response.json()
+                }else {return response.json()}
+            }).then(entregadores => {
+                setEntregadores(entregadores)
+                alert(JSON.stringify(entregadores))
+            }
+            ).catch(ex => {
+                alert(ex)
+            })
+            }
+        fetchData()
+    },[])
 
 
 
